@@ -6,12 +6,12 @@
 3. Setup your Dockerfile and build the image: "docker build -t flask-metrics-app:latest ."
 4. Create the kubemanifest yaml file (flask-app.yaml)
 5. minikube start (by opening powershell and do run as admin). Before this run cmd >>minikube delete --all
-6. Add image to cluster - "minikube image load flask-metrics-app:latest"
+6. Add image to cluster - "minikube image load flask-metrics-app:latest". We can also ensure that our image is loaded properly via cmd >>minikube image list
 7. Apply the Kubemanifest file to our cluster - "kubectl apply -f flask-app.yaml" [from root dir of proj]
 8. Access the Flask App: Use the following to get the service URL - "minikube service flask-metrics-app --url"
 
 >>>>> Install Prometheus Using Helm <<<<<
-9. Install helm - (winget install Helm.Helm / scoop install helm / choco install kubernetes-helm)
+9. Install helm - using cmds >> (winget install Helm.Helm / scoop install helm / choco install kubernetes-helm)
 10. Validate if helm was installed properly - "helm version"
 11. Add Prometheus to Helm repo:
     "helm repo add prometheus-community https://prometheus-community.github.io/helm-charts"
@@ -72,7 +72,7 @@ scrape_configs:
 
 30. Login to Grafana: [username: admin | Check default password: see below instruction]
     Bash - kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
-    Windowns Poershell - kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" [get the base64 code]
+    Windowns Powershell - kubectl get secret --namespace monitoring grafana -o jsonpath="{.data.admin-password}" [get the base64 code]
                          [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String("<You Code>"))
 
 
